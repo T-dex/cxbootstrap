@@ -1,0 +1,41 @@
+#Filterbar, #issuesPane{
+    height:100%;
+}
+body{
+    padding:0;
+    margin:0;
+}
+
+#detailsPane {
+    max-width:none;
+    height:100vh;
+}
+#sortbtn{
+    height: 100%;
+    align-self: center;
+}
+
+
+.table{
+    display:none;
+}
+
+.showtable{
+    display: visible;
+    overflow-y:scroll;
+    overflow-x: scroll
+}
+#bottom{
+    position:sticky;
+    top:85vh;
+    z-index:8675309;
+}
+#issueDisplay{
+    margin-top:-8vh;
+}
+/* .footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;} */
+
+
