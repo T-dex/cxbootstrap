@@ -30,7 +30,7 @@ body{
     top:85vh;
     z-index:8675309;
 }
-#issueDisplay{
+#issuesDisplay{
     margin-top:-8vh;
 }
 /* .footer{
