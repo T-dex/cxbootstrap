@@ -962,12 +962,14 @@
 //filter Modal
 $('body').on('click', '#filterbtn', function(){
 	///Good ole modal
+	alert('')
 	$('#filtermodal').modal();
 })
 //Clicked item in modal
 //This data will be used to call WebSql server and render issues pane.
 $('body').on('click','#filterList', function(e){
 	// works for showing all the data can be uniquely captured
+	alert('')
 	console.log(e.target.innerHTML)
 })
 	//search button and input field. 
