@@ -15,6 +15,7 @@ body{
     align-self: center;
 }
 .table{
+    /* rename */
     display:none;
 }
 .showtable{
@@ -25,7 +26,7 @@ body{
 #bottom{
     position:sticky;
     top:85vh;
-    z-index:8675309;
+    z-index: 1049;
 }
 #issuesDisplay{
     cursor:pointer;
