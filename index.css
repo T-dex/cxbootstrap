@@ -14,12 +14,11 @@ body{
     height: 100%;
     align-self: center;
 }
-.table{
+.hideTable{
     /* rename */
     display:none;
 }
 .showtable{
-    display: visible;
     overflow-y:scroll;
     overflow-x: scroll
 }

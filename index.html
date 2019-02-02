@@ -7,8 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- <link rel="stylesheet" type="text/css" media="screen" href="index.css" /> -->
     <link rel="stylesheet" type="text/css" href="./assests/bootstrap/css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="./assests/bootstrap/css/bootstrap.min.css" />
-    
+	<link rel="stylesheet" type="text/css" href="./assests/bootstrap/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="./assests/jquery.fancybox.css">
+	<style>
+			.container-fixed-bottom {
+				position: absolute;
+				bottom: 0;
+				width: 100%;
+			}
+		</style>
     <script src="index.js"></script>
 </head>
 <body class="bg-dark p-0 m-0">
@@ -33,17 +40,19 @@
 			</div>
 
 			<!-- Data is being passed from card to details pane with out data being on page -->
-			<div class="col-lg-3 col-md-3 inline container-fluid" id="issues" style="background-color: #999; height: calc(100vh - 56px);overflow:scroll;">
-				<div class="inline sticky-top">
-					<li class="nav-item dropdown nav-dark bg-dark sticky-top px-1 pb-2">
-					<div class="row ml-0 mr-2 justify-content-between">
-						<form class="form-inline my-2 my-lg-0">
+			<div class="col-lg-2 col-md-2 inline container-fluid" id="issues" style="background-color: #999; height: calc(100vh - 56px);overflow:scroll;">
+				<div class="container-fixed"" style="height:56px">
+					<li class="nav nav-dark bg-dark h-100">
+					<div class="row m-0 inline  flex-lg-nowrap flex-md-wrap justify-content-between align-content-center w-100">
+						<form class="my-2 my-lg-0">
 								<input class="form-control input-sm mr-sm-2" type="search" id="search" placeholder="Search" aria-label="Search">
-								<button class="btn btn-sm btn-outline-success my-2 my-sm-0" id="searchbtn" type="submit">Search</button>
 						</form>
-						<button class="btn btn-sm btn-inline btn-outline-primary my-2 my-sm-0" id="filterbtn">Filter Issues</button>
 					
-					<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="align-self: center;">Sort issues</a>
+						<div>
+						<button class="btn btn-sm btn-inline btn-outline-primary my-2 my-sm-0" id="filterbtn">Filter</button>
+					</div>
+					<div>
+					<a class="nav-link dropdown-toggle border border-primary rounded" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="align-self: center;">Sort</a>
 						<div class="dropdown-menu" id="filter">
 										<a class="dropdown-item" href="#" id="hightoLow">Sort High to Low</a >
 										<a class="dropdown-item" href="#" id="lowtoHigh">Sort Low to High</a >
@@ -53,13 +62,13 @@
 					
 					</li>
 				</div>
-				<div>
+				<div class="items-list" style="height:calc(100vh - 168px); overflow:scroll;">
 					<div class="card issueCards" >
 						<div class="card-body" key=1>
 							<h5 class="card-titles">Checklist AHU-1</h5>
 							<h6 class="card-subtitle mb-2 text-muted">Equipment AHU-1</h6>
 							<p class="card-text">More detail here.</p>
-							<div class="table" id="dataTable">
+							<div class="hideTable" id="dataTable">
 									<table class="tableContents">
 											<thead>
 												<th>Data Collection Test Table</th>
@@ -319,7 +328,7 @@
 							<h5 class="card-titles">Checklist AHU-2</h5>
 							<h6 class="card-subtitle mb-2 text-muted">Equipment AHU-2</h6>
 							<p class="card-text">More detail here.</p>
-							<div class="table" id="dataTable">
+							<div class="hideTable" id="dataTable">
 									<table class="tableContents">
 											<thead>
 												<th>Data Collection Test Table</th>
@@ -356,7 +365,7 @@
 							<h5 class="card-titles">Checklist AHU-3</h5>
 							<h6 class="card-subtitle mb-2 text-muted">Equipment AHU-3</h6>
 							<p class="card-text">More detail here.</p>
-							<div class="table" id="dataTable">
+							<div class="hideTable" id="dataTable">
 									<table class="tableContents">
 											<thead>
 												<th>Data Collection Test Table</th>
@@ -507,7 +516,7 @@
 							<h5 class="card-titles">Checklist SHU-4</h5>
 							<h6 class="card-subtitle mb-2 text-muted">Equipment SHU-4</h6>
 							<p class="card-text">More detail here.</p>
-							<div class="table" id="dataTable">
+							<div class="hideTable" id="dataTable">
 									<table class="tableContents">
 											<thead>
 												<th>Data Collection Test Table</th>
@@ -598,7 +607,7 @@
 							<h5 class="card-titles">Checklist SHU-6</h5>
 							<h6 class="card-subtitle mb-2 text-muted">Equipment SHU-6</h6>
 							<p class="card-text">More detail here.</p>
-							<div class="table" id="dataTable">
+							<div class="hideTable" id="dataTable">
 									<table class="tableContents">
 											<thead>
 												<th>Data Collection Test Table</th>
@@ -677,7 +686,7 @@
 							<h5 class="card-titles">Checklist SHU-5</h5>
 							<h6 class="card-subtitle mb-2 text-muted">Equipment SHU-5</h6>
 							<p class="card-text">More detail here.</p>
-							<div class="table" id="dataTable">
+							<div class="hideTable" id="dataTable">
 									<table class="tableContents">
 											<thead>
 												<th>Data Collection Test Table</th>
@@ -763,21 +772,22 @@
 							</div>
 						</div>
 					</div>
+				
 				</div>
+
+					<!-- TODO Change pagination to pop over (10 items for no) -->
 					<div class="container-fixed-bottom d-flex justify-content-center align-items-center" style="height: 56px; background-color: #565656">
 							<nav aria-label="Page Navigation">
 								<ul class="pagination mb-0">
 									<li class="page-item"><a class="page-link" href="#">Previous</a></li>
 									<li class="page-item"><a class="page-link" href="#">1</a></li>
-									<li class="page-item"><a class="page-link" href="#">2</a></li>
-									<li class="page-item"><a class="page-link" href="#">3</a></li>
 									<li class="page-item"><a class="page-link" href="#">Next</a></li>
 								</ul>
 							</nav>
 					</div>
 			</div>
 			<!-- Details Pane -->
-			<div class="col-lg-7 col-md-9 d-none d-md-block" id="detailsPane" style="background-color: #fff; height: calc(100vh - 56px);overflow:scroll;" style="max-width:720px">
+			<div class="col-lg-8 col-md-10 d-none d-md-block" id="detailsPane" style="background-color: #fff; height: calc(100vh - 56px);overflow:scroll;" style="max-width:720px">
 				<div class="card border-0" id="details">
 					<div class="card-body" id="detailcard" >
 						<h5 class="card-title">Checklist AHU-2</h5>
@@ -786,7 +796,7 @@
 				
 					</div>
 				</div>
-				<div class="showtable" style="max-width:720px">
+				<div class="table" style="max-width:720px">
 					<table id="displaytable" class="showtable">
 
 					</table>
@@ -794,6 +804,9 @@
 			</div>
 		</div>
 		<!--Sidebar modal-->
+		<!-- Build out 2 different models. One with fancybox and the other hard coded. 
+		TODO with all three modals
+	 -->
 		<div class="modal" id="sidebarmodal" tabindex="-1" role="dialog">
 			<div class="modal-dialog modal-xl" role="document">
 				<div class="modal-content">
@@ -878,7 +891,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script type="text/javascript" src="./assests/bootstrap/js/bootstrap.bundle.js"></script>
     <script type="text/javascript" src="./assests/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript" src="./assests/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="./assests/bootstrap/js/bootstrap.js"></script>
+	<script src="./assests/jquery.fancybox.min.js"></script>
     <script>
 		
 
@@ -920,7 +934,7 @@
 			var updatedTable=tableInfo.cloneNode(true)
 			$('#displaytable').html(updatedTable)
 			// This is where the card is cloned and inserted into the details pane. 
-			//TODO find a more unique way to gather correct info for calls and updating page
+			// TODO find a more unique way to gather correct info for calls and updating page
 			var detailsCard=$(this).contents()[1]
 			var updatedDetails=detailsCard.cloneNode(true)
 			$('#detailcard').html(updatedDetails);
