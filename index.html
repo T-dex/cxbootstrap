@@ -40,19 +40,19 @@
 			</div>
 
 			<!-- Data is being passed from card to details pane with out data being on page -->
-			<div class="col-lg-2 col-md-2 inline container-fluid" id="issues" style="background-color: #999; height: calc(100vh - 56px);overflow:scroll;">
-				<div class="container-fixed"" style="height:56px">
+			<div class="col-lg-2 col-md-4 inline container-fluid" id="issues" style="background-color: #999; height: calc(100vh - 56px);overflow:scroll;">
+				<div class="container-fixed" style="height:90px">
 					<li class="nav nav-dark bg-dark h-100">
-					<div class="row m-0 inline  flex-lg-nowrap flex-md-wrap justify-content-between align-content-center w-100">
-						<form class="my-2 my-lg-0">
-								<input class="form-control input-sm mr-sm-2" type="search" id="search" placeholder="Search" aria-label="Search">
+					<div class="row m-0 inline flex-lg-nowrap flex-md-wrap justify-content-between align-content-center w-100">
+						<form class="mx-2 mx-lg-0 w-100 mb-1 mt-1" id="search">
+								<input class="form-control input-sm mr-sm-2" type="search" id="searchbah placeholder="Search" aria-label="Search">
 						</form>
 					
 						<div>
 						<button class="btn btn-sm btn-inline btn-outline-primary my-2 my-sm-0" id="filterbtn">Filter</button>
 					</div>
 					<div>
-					<a class="nav-link dropdown-toggle border border-primary rounded" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="align-self: center;">Sort</a>
+					<a class="nav-link dropdown-toggle border border-primary rounded align-self-center" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="align-self: center;">Sort</a>
 						<div class="dropdown-menu" id="filter">
 										<a class="dropdown-item" href="#" id="hightoLow">Sort High to Low</a >
 										<a class="dropdown-item" href="#" id="lowtoHigh">Sort Low to High</a >
@@ -62,13 +62,13 @@
 					
 					</li>
 				</div>
-				<div class="items-list" style="height:calc(100vh - 168px); overflow:scroll;">
+				<div class="items-list" style="height:calc(100vh - 193px); overflow:scroll;">
 					<div class="card issueCards" >
 						<div class="card-body" key=1>
 							<h5 class="card-titles">Checklist AHU-1</h5>
 							<h6 class="card-subtitle mb-2 text-muted">Equipment AHU-1</h6>
 							<p class="card-text">More detail here.</p>
-							<div class="hideTable" id="dataTable">
+							<div style="display:none" id="dataTable1">
 									<table class="tableContents">
 											<thead>
 												<th>Data Collection Test Table</th>
@@ -536,66 +536,6 @@
 													<td>Test Data Column SHU-4</td>
 													
 												</tr>	
-												<tr>
-													<td>Test Data Column SHU-4</td>
-													<td>Test Data Column SHU-4</td>
-													<td>Test Data Column SHU-4</td>
-													
-												</tr>	
-												<tr>
-													<td>Test Data Column SHU-4</td>
-													<td>Test Data Column SHU-4</td>
-													<td>Test Data Column SHU-4</td>
-													
-												</tr>
-												<tr>
-													<td>Test Data Column SHU-4</td>
-													<td>Test Data Column SHU-4</td>
-													<td>Test Data Column SHU-4</td>
-													
-												</tr>	
-												<tr>
-													<td>Test Data Column SHU-4</td>
-													<td>Test Data Column SHU-4</td>
-													<td>Test Data Column SHU-4</td>
-													
-												</tr>	
-												<tr>
-													<td>Test Data Column SHU-4</td>
-													<td>Test Data Column SHU-4</td>
-													<td>Test Data Column SHU-4</td>
-													
-												</tr>
-												<tr>
-													<td>Test Data Column SHU-4</td>
-													<td>Test Data Column SHU-4</td>
-													<td>Test Data Column SHU-4</td>
-													
-												</tr>	
-												<tr>
-													<td>Test Data Column SHU-4</td>
-													<td>Test Data Column SHU-4</td>
-													<td>Test Data Column SHU-4</td>
-													
-												</tr>	
-												<tr>
-													<td>Test Data Column SHU-4</td>
-													<td>Test Data Column SHU-4</td>
-													<td>Test Data Column SHU-4</td>
-													
-												</tr>
-												<tr>
-													<td>Test Data Column SHU-4</td>
-													<td>Test Data Column SHU-4</td>
-													<td>Test Data Column SHU-4</td>
-													
-												</tr>	
-												<tr>
-													<td>Test Data Column SHU-4</td>
-													<td>Test Data Column SHU-4</td>
-													<td>Test Data Column SHU-4</td>
-													
-												</tr>	
 											</tbody>
 	
 									</table>
@@ -780,14 +720,14 @@
 							<nav aria-label="Page Navigation">
 								<ul class="pagination mb-0">
 									<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-									<li class="page-item"><a class="page-link" href="#">1</a></li>
+									<li class="page-item" data-toggle="popover" data-placement="top" data-content="This is where the pagination will live"><a class="page-link" href="#">1</a></li>
 									<li class="page-item"><a class="page-link" href="#">Next</a></li>
 								</ul>
 							</nav>
 					</div>
 			</div>
 			<!-- Details Pane -->
-			<div class="col-lg-8 col-md-10 d-none d-md-block" id="detailsPane" style="background-color: #fff; height: calc(100vh - 56px);overflow:scroll;" style="max-width:720px">
+			<div class="col-lg-8 col-md-8 d-none d-md-block" id="detailsPane" style="background-color: #fff; height: calc(100vh - 56px);overflow:scroll;" style="max-width:720px">
 				<div class="card border-0" id="details">
 					<div class="card-body" id="detailcard" >
 						<h5 class="card-title">Checklist AHU-2</h5>
@@ -879,8 +819,7 @@
 					</div>
 				</div>
 			</div>
-        </div>
-        
+		</div>        
 
 	</div>
 
@@ -944,7 +883,12 @@
                 var detailContent = $('#detailcard').detach();
                 $('.modal-sidebar-body').html(detailContent);
 				$('.modaltable').html(tableDetails)
-                $('#detailmodal').modal();
+                $.fancybox.open($('.modaltable'),{
+					touch:true
+					
+				})
+				
+				
             }
         });
 		// Moving the details to and from the Modal for the display pane. Tables are not the final product. Used for display purposes(sp?)
@@ -977,12 +921,20 @@ $('body').on('click','#filterList', function(e){
 })
 	//search button and input field. 
 	//TODO have it filter with key imputs rather than submit
-	$('body').on('click','#searchbtn', function(e){
-		var inputValue=$('#search')[0].value
+	$('body').on('submit','#search',function(e){
+		e.preventDefault();
+		var inputValue=$('input')[0].value
 		console.log(inputValue)
 	})
+//popover pagiantion 
+	$(function () {
+  $('[data-toggle="popover"]').popover()
+})
 
-
+$('body').on('click','.popover', function(e){
+	console.log(e.timeStamp)
+	$('.popover').popover('hide')
+})
      
 		
 	</script>
