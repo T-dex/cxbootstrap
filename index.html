@@ -731,18 +731,20 @@
 			</div>
 			<!-- Details Pane -->
 			<div class="col-lg-8 col-md-8 d-none d-md-block" id="detailsPane" style="background-color: #fff; height: calc(100vh - 56px);overflow:scroll;" style="max-width:720px">
-				<div class="card border-0" id="details">
-					<div class="card-body" id="detailcard" >
-						<h5 class="card-title">Checklist AHU-2</h5>
-						<h6 class="card-subtitle mb-2 text-muted">Equipment AHU-2</h6>
-						<p class="card-text">More detail here.</p>
-				
+				<div id="deets">
+					<div class="card border-0" id="details">
+						<div class="card-body" id="detailcard" >
+							<h5 class="card-title">Checklist AHU-2</h5>
+							<h6 class="card-subtitle mb-2 text-muted">Equipment AHU-2</h6>
+							<p class="card-text">More detail here.</p>
+					
+						</div>
 					</div>
-				</div>
-				<div class="table" style="max-width:720px">
-					<table id="displaytable" class="showtable">
+					<div class="table" style="max-width:720px">
+						<table id="displaytable" class="showtable">
 
-					</table>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -898,19 +900,15 @@
                 $.fancybox.open([
 
 					{
-						src:'#displaytable',
-					},
-					{
-						src:'#detailcard',
+						src:'#deets',
 					}
-					
 				],{
 					afterShow:function(){
 						console.info($('.modaltable'))
 					},
 					afterClose:function(){
-						$('#detailcard').attr('style',"display:block");
-						$('#displaytable').attr('style',"display:block")
+						$('#deets').attr('style',"display:block");
+						
 					}
 				}
 				)
