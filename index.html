@@ -72,7 +72,7 @@
 							<h6 class="card-subtitle mb-2 text-muted">Equipment AHU-1</h6>
 							<p class="card-text">More detail here.</p>
 							<div style="display:none" id="dataTable1">
-									<table class="tableContents">
+									<table class="table">
 											<thead>
 												<th>Data Collection Test Table</th>
 												<th>Second row</th>
@@ -332,7 +332,7 @@
 							<h6 class="card-subtitle mb-2 text-muted">Equipment AHU-2</h6>
 							<p class="card-text">More detail here.</p>
 							<div class="hideTable" id="dataTable">
-									<table class="tableContents">
+									<table class="table">
 											<thead>
 												<th>Data Collection Test Table</th>
 												<th>Second row</th>
@@ -369,7 +369,7 @@
 							<h6 class="card-subtitle mb-2 text-muted">Equipment AHU-3</h6>
 							<p class="card-text">More detail here.</p>
 							<div class="hideTable" id="dataTable">
-									<table class="tableContents">
+									<table class="table">
 											<thead>
 												<th>Data Collection Test Table</th>
 												<th>Second row</th>
@@ -520,7 +520,7 @@
 							<h6 class="card-subtitle mb-2 text-muted">Equipment SHU-4</h6>
 							<p class="card-text">More detail here.</p>
 							<div class="hideTable" id="dataTable">
-									<table class="tableContents">
+									<table class="table">
 											<thead>
 												<th>Data Collection Test Table</th>
 												<th>Second row</th>
@@ -551,7 +551,7 @@
 							<h6 class="card-subtitle mb-2 text-muted">Equipment SHU-6</h6>
 							<p class="card-text">More detail here.</p>
 							<div class="hideTable" id="dataTable">
-									<table class="tableContents">
+									<table class="table">
 											<thead>
 												<th>Data Collection Test Table</th>
 												<th>Second row</th>
@@ -630,7 +630,7 @@
 							<h6 class="card-subtitle mb-2 text-muted">Equipment SHU-5</h6>
 							<p class="card-text">More detail here.</p>
 							<div class="hideTable" id="dataTable">
-									<table class="tableContents">
+									<table class="table">
 											<thead>
 												<th>Data Collection Test Table</th>
 												<th>Second row</th>
@@ -798,8 +798,10 @@
 					</div>
 				</div>
 			</div>
-        </div>
-		<div class="modal" id="detailmodal" tabindex="-1" role="dialog">
+		</div>
+		
+	-->
+		<!-- <div class="modal" id="detailmodal" tabindex="-1" role="dialog">
 			<div class="modal-dialog modal-xl" role="document" id="detailsPane">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -820,7 +822,7 @@
 					</div>
 				</div>
 			</div>
-		</div>         -->
+		</div>     -->
 
 	</div>
 
@@ -869,7 +871,7 @@
 				touch:true,
 				//Pass all CSS in quotes here
 				'padding':0,
-				afterClose:function(e){
+				afterClose:function(){
 				$('#sidebar-content').attr('style', "display:block")
 				}
 			})
@@ -890,13 +892,28 @@
 			//Media Breakpoint
             if($(window).width() < 768){
 				var tableDetails=$('#displaytable')
-                var detailContent = $('#detailcard').detach();
+                var detailContent = $('#detailcard')
                 $('.modal-sidebar-body').html(detailContent);
 				$('.modaltable').html(tableDetails)
-                $.fancybox.open($('.modaltable'),{
-					touch:true
+                $.fancybox.open([
+
+					{
+						src:'#displaytable',
+					},
+					{
+						src:'#detailcard',
+					}
 					
-				})
+				],{
+					afterShow:function(){
+						console.info($('.modaltable'))
+					},
+					afterClose:function(){
+						$('#detailcard').attr('style',"display:block");
+						$('#displaytable').attr('style',"display:block")
+					}
+				}
+				)
 				
 				
             }
@@ -904,13 +921,13 @@
 
 
 		// Moving the details to and from the Modal for the display pane. Tables are not the final product. Used for display purposes(sp?)
-		$('body').on('hidden.bs.modal','#detailmodal', function (e) {	
-			e.stopPropagation()
-			var tableContent=$('#displaytable').detach();
-			$('.showtable').html(tableContent)
-			var detailContent = $('#detailcard').detach();
-			$('#details').html(detailContent)
-		});
+		// $('body').on('hidden.bs.modal','#detailmodal', function (e) {	
+		// 	e.stopPropagation()
+		// 	var tableContent=$('#displaytable').detach();
+		// 	$('.table').html(tableContent)
+		// 	var detailContent = $('#detailcard').detach();
+		// 	$('#details').html(detailContent)
+		// });
 
 
 	//Hiding sidebar/checklist items general idea is present with grabbing data. 
