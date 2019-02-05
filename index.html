@@ -28,15 +28,17 @@
 				Checklist Pane
 			</button>
 		</nav>
-		<div class="row no-gutters">
+		<div class="row no-gutters" id="letsSeeIfItGrabsThisTest">
 			<div class="col-lg-2 p-3 d-none d-lg-block" id="sidebar" style="background-color: #333; height: calc(100vh - 56px);overflow:scroll;">
-				<ul class="list-group" id="sidebar-content">
+			<a data-fancybox-trigger="gallery" href="javascript:;">
+				<ul class="list-group" id="sidebar-content" style="display:block;">
 					<li class="list-group-item">Checklists</li>
 					<li class="list-group-item">Tests</li>
 					<li class="list-group-item">Issues</li>
 					<li class="list-group-item">Field Observations</li>
 					<li class="list-group-item">Settings</li>
 				</ul>
+			</a>
 			</div>
 
 			<!-- Data is being passed from card to details pane with out data being on page -->
@@ -44,15 +46,16 @@
 				<div class="container-fixed" style="height:90px">
 					<li class="nav nav-dark bg-dark h-100">
 					<div class="row m-0 inline flex-lg-nowrap flex-md-wrap justify-content-between align-content-center w-100">
-						<form class="mx-2 mx-lg-0 w-100 mb-1 mt-1" id="search">
-								<input class="form-control input-sm mr-sm-2" type="search" id="searchbah placeholder="Search" aria-label="Search">
+						<form class="mx-1 mx-lg-0 w-100 mb-1 mt-1 align-self-center" id="search">
+								<input class="form-control input-sm mr-sm-2" type="search" id="searchbah" placeholder="Search" aria-label="Search">
 						</form>
 					
-						<div>
-						<button class="btn btn-sm btn-inline btn-outline-primary my-2 my-sm-0" id="filterbtn">Filter</button>
+						<div style="display:flex" class="m-1">
+						<button class="btn btn-sm btn-inline btn-outline-primary my-2 my-sm-0 align-self-center" id="filterbtn">Filter</button>
 					</div>
-					<div>
-					<a class="nav-link dropdown-toggle border border-primary rounded align-self-center" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="align-self: center;">Sort</a>
+					<div style="display:flex">
+					<a class="nav-link dropdown-toggle border border-primary rounded align-self-center align-self-center" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="align-self: center;display:inline-flex;padding: .25rem .5rem;
+					font-size: .875rem;">Sort</a>
 						<div class="dropdown-menu" id="filter">
 										<a class="dropdown-item" href="#" id="hightoLow">Sort High to Low</a >
 										<a class="dropdown-item" href="#" id="lowtoHigh">Sort Low to High</a >
@@ -715,7 +718,7 @@
 				
 				</div>
 
-					<!-- TODO Change pagination to pop over (10 items for no) -->
+				
 					<div class="container-fixed-bottom d-flex justify-content-center align-items-center" style="height: 56px; background-color: #565656">
 							<nav aria-label="Page Navigation">
 								<ul class="pagination mb-0">
@@ -747,7 +750,7 @@
 		<!-- Build out 2 different models. One with fancybox and the other hard coded. 
 		TODO with all three modals
 	 -->
-		<div class="modal" id="sidebarmodal" tabindex="-1" role="dialog">
+		<!-- <div class="modal" id="sidebarmodal" tabindex="-1" role="dialog">
 			<div class="modal-dialog modal-xl" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -766,7 +769,7 @@
 				</div>
 			</div>
 		</div>
-		<!-- Filter Modal -->
+		
 		<div class="modal" id="filtermodal" tabindex="-1" role="dialog">
 			<div class="modal-dialog modal-sm" role="document" id="detailsPane">
 				<div class="modal-content">
@@ -796,8 +799,6 @@
 				</div>
 			</div>
         </div>
-		
-			<!--Details Modal   -->
 		<div class="modal" id="detailmodal" tabindex="-1" role="dialog">
 			<div class="modal-dialog modal-xl" role="document" id="detailsPane">
 				<div class="modal-content">
@@ -819,7 +820,7 @@
 					</div>
 				</div>
 			</div>
-		</div>        
+		</div>         -->
 
 	</div>
 
@@ -862,10 +863,18 @@
 		})
         //Load sidebar. SImplicty is key and this looks good to stay for the foreseable future
         $('#sidebar-button').on('click', function() {
-			var sidebarContent = $('#sidebar-content').detach();
-			$('.modal-sidebar-body').html(sidebarContent);
-			$('#sidebarmodal').modal();
+		var sidebarContent = $('#sidebar-content');
+		var fancyContent=sidebarContent[0].innerHTML
+			$.fancybox.open($('#sidebar-content'),{
+				touch:true,
+				//Pass all CSS in quotes here
+				'padding':0,
+				afterClose:function(e){
+				$('#sidebar-content').attr('style', "display:block")
+				}
+			})
 		});
+		
 // Grabbing card data. Using modals with unique ids to grab data from the DOM and populate. Thinking there should be a better way than have two seperate modals. For the time being it appears that this will be the best way to go about it.
         $('body').on('click','.card' ,function(e){
 			//this is where the table data is cloned. Know this is not the right practice and this would be were the call to the websql server would be made for the corresponding data
@@ -876,7 +885,8 @@
 			// TODO find a more unique way to gather correct info for calls and updating page
 			var detailsCard=$(this).contents()[1]
 			var updatedDetails=detailsCard.cloneNode(true)
-			$('#detailcard').html(updatedDetails);
+			$.fancybox.open($('.updateDetails'))
+			// $('#detailcard').html(updatedDetails);
 			//Media Breakpoint
             if($(window).width() < 768){
 				var tableDetails=$('#displaytable')
@@ -891,6 +901,8 @@
 				
             }
         });
+
+
 		// Moving the details to and from the Modal for the display pane. Tables are not the final product. Used for display purposes(sp?)
 		$('body').on('hidden.bs.modal','#detailmodal', function (e) {	
 			e.stopPropagation()
@@ -923,7 +935,7 @@ $('body').on('click','#filterList', function(e){
 	//TODO have it filter with key imputs rather than submit
 	$('body').on('submit','#search',function(e){
 		e.preventDefault();
-		var inputValue=$('input')[0].value
+		var inputValue=$('#searchbah').val()
 		console.log(inputValue)
 	})
 //popover pagiantion 
