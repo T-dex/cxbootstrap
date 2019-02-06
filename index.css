@@ -5,10 +5,14 @@ body{
     padding:0;
     margin:0;
 }
-
+a{
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: none;
+}
 #detailsPane {
     max-width:none;
-    height:100vh;
 }
 
 .hideTable{
@@ -24,9 +28,8 @@ body{
     top:85vh;
     z-index: 1049;
 }
-#issuesDisplay{
-    cursor:pointer;
-    margin-top:-8vh;
+.items-list{
+    cursor: pointer;
 }
 .fancybox-content{
     padding:0

@@ -53,7 +53,7 @@
 						<div style="display:flex" class="m-1">
 						<button class="btn btn-sm btn-inline btn-outline-primary my-2 my-sm-0 align-self-center" id="filterbtn">Filter</button>
 					</div>
-					<div style="display:flex">
+					<div style="display:flex" class="m-1">
 					<a class="nav-link dropdown-toggle border border-primary rounded align-self-center align-self-center" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" style="align-self: center;display:inline-flex;padding: .25rem .5rem;
 					font-size: .875rem;">Sort</a>
 						<div class="dropdown-menu" id="filter">
@@ -723,7 +723,7 @@
 							<nav aria-label="Page Navigation">
 								<ul class="pagination mb-0">
 									<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-									<li class="page-item" data-toggle="popover" data-placement="top" data-content="This is where the pagination will live"><a class="page-link" href="#">1</a></li>
+									<li class="page-item popoverbtn" data-toggle="popover" ><a class="page-link" href="#">1</a></li>
 									<li class="page-item"><a class="page-link" href="#">Next</a></li>
 								</ul>
 							</nav>
@@ -752,36 +752,10 @@
 		<!-- Build out 2 different models. One with fancybox and the other hard coded. 
 		TODO with all three modals
 	 -->
-		<!-- <div class="modal" id="sidebarmodal" tabindex="-1" role="dialog">
-			<div class="modal-dialog modal-xl" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title">Sidebar</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-sidebar-body">
-						<p>Modal body text goes here.</p>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary">Save changes</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		
 		<div class="modal" id="filtermodal" tabindex="-1" role="dialog">
 			<div class="modal-dialog modal-sm" role="document" id="detailsPane">
 				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title">Filter Issues</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
+					<div class="table">
 						<ul class="list-group" id="filterList">
 							<li class="list-group-item" >Date Identified</li>
 							<li class="list-group-item" >Reference Number</li>
@@ -791,41 +765,9 @@
 							<li class="list-group-item" >Due Date</li>
 						</ul>
 					</div>
-					<div class="modaltable" >
-							
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary">Save changes</button>
-					</div>
 				</div>
 			</div>
 		</div>
-		
-	-->
-		<!-- <div class="modal" id="detailmodal" tabindex="-1" role="dialog">
-			<div class="modal-dialog modal-xl" role="document" id="detailsPane">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title">Not the sideBar!</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-sidebar-body">
-						<p>Modal body text goes here.</p>
-					</div>
-					<div class="modaltable" >
-							
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary">Save changes</button>
-					</div>
-				</div>
-			</div>
-		</div>     -->
-
 	</div>
 
 	<!-- Script below is for electron and jquery. THere are some issues with loading and this is needed to define $ -->
@@ -847,6 +789,7 @@
 			var cardArray=[...$('.issueCards')]
 			//this sort is for displaying functionality only
 			cardArray.sort(function(a,b){
+				console.log(a.children[0].attributes[1].value)
 				return a.children[0].attributes[1].value>b.children[0].attributes[1].value? -1:1
 			})
 			$('#issuesDisplay').html(cardArray)
@@ -889,8 +832,8 @@
 			// TODO find a more unique way to gather correct info for calls and updating page
 			var detailsCard=$(this).contents()[1]
 			var updatedDetails=detailsCard.cloneNode(true)
+			$('#detailcard').html(updatedDetails);
 			$.fancybox.open($('.updateDetails'))
-			// $('#detailcard').html(updatedDetails);
 			//Media Breakpoint
             if($(window).width() < 768){
 				var tableDetails=$('#displaytable')
@@ -903,17 +846,11 @@
 						src:'#deets',
 					}
 				],{
-					afterShow:function(){
-						console.info($('.modaltable'))
-					},
 					afterClose:function(){
-						$('#deets').attr('style',"display:block");
-						
+						$('#deets').attr('style',"display:block");	
 					}
 				}
 				)
-				
-				
             }
         });
 
@@ -938,7 +875,9 @@
 //filter Modal
 $('body').on('click', '#filterbtn', function(){
 	///Good ole modal
-	$('#filtermodal').modal();
+	$.fancybox.open({
+		src:'#filtermodal'
+	})
 })
 //Clicked item in modal
 //This data will be used to call WebSql server and render issues pane.
@@ -954,12 +893,15 @@ $('body').on('click','#filterList', function(e){
 		console.log(inputValue)
 	})
 //popover pagiantion 
-	$(function () {
-  $('[data-toggle="popover"]').popover()
-})
+	
+  $('.popoverbtn').popover({ html:true,placement:"top", content:function(){
+	  var calendar="<table><tbody><tr><td>1</td><td>2</td><td>3</td><td>4</td></tr></tbody></table>"
+	  return calendar
+	}})
+
 
 $('body').on('click','.popover', function(e){
-	console.log(e.timeStamp)
+	console.log(e.target.innerHTML)
 	$('.popover').popover('hide')
 })
      
