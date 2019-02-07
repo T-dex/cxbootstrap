@@ -770,7 +770,7 @@
 			</div>
 		</div>
 
-		<div id="addItem" style="height:100%;width:100%">
+		<div id="addItem" style="height:100%;width:100%" onclick="">
 			<div>
 				<h1>Header for input gallery</h1>
 			</div>
@@ -845,26 +845,37 @@
 			var detailsCard=$(this).contents()[1]
 			var updatedDetails=detailsCard.cloneNode(true)
 			$('#detailcard').html(updatedDetails);
-			$('#addIssue').on('click',function(){
-				console.log("Biggah picture")
-				$.fancybox.open($('#addItem'))
-			})
 			//Media Breakpoint
             if($(window).width() < 768){
-				var tableDetails=$('#displaytable')
-                var detailContent = $('#detailcard')
-                $('.modal-sidebar-body').html(detailContent);
-				$('.modaltable').html(tableDetails)
                 $.fancybox.open({
 						src:'#deets',
-					},{
+					},
+					{
 					afterClose:function(){
+						$('#deets').attr('style',"display:block");	
+						$.fancybox.destroy();
+					}
+				}
+				)
+			}
+		});
+		
+		$('body').on('click','#addIssue',function(){
+				console.log("Biggah picture")
+				$.fancybox.open({
+					src:'#addItem'
+				},
+				{
+					afterClose:function(){
+						
+						$('#addItem').fancybox.getInstance().close();
 						$('#deets').attr('style',"display:block");	
 					}
 				}
 				)
-            }
-        });
+				
+
+			})
 
 
 		// Moving the details to and from the Modal for the display pane. Tables are not the final product. Used for display purposes(sp?)
