@@ -745,12 +745,13 @@
 
 						</table>
 					</div>
+					<button class="btn btn-primary" id="addIssue">Add Issue</button>
 				</div>
 			</div>
 		</div>
 		<!--Sidebar modal-->
 		<!-- Build out 2 different models. One with fancybox and the other hard coded. 
-		TODO with all three modals
+	
 	 -->
 		<div class="modal" id="filtermodal" tabindex="-1" role="dialog">
 			<div class="modal-dialog modal-sm m-0" role="document" id="detailsPane">
@@ -766,6 +767,17 @@
 						</ul>
 					</div>
 				</div>
+			</div>
+		</div>
+
+		<div id="addItem" style="height:100%;width:100%">
+			<div>
+				<h1>Header for input gallery</h1>
+			</div>
+			<div>
+				<form>
+				<input type="text"/>
+				</form>
 			</div>
 		</div>
 	</div>
@@ -815,6 +827,7 @@
 			$.fancybox.open($('#sidebar-content'),{
 				touch:true,
 				//Pass all CSS in quotes here
+				'padding':0,
 				afterClose:function(){
 				$('#sidebar-content').attr('style', "display:block")
 				}
@@ -832,15 +845,18 @@
 			var detailsCard=$(this).contents()[1]
 			var updatedDetails=detailsCard.cloneNode(true)
 			$('#detailcard').html(updatedDetails);
-			$.fancybox.open($('.updateDetails'))
+			$('#addIssue').on('click',function(){
+				console.log("Biggah picture")
+				$.fancybox.open($('#addItem'))
+			})
 			//Media Breakpoint
             if($(window).width() < 768){
 				var tableDetails=$('#displaytable')
                 var detailContent = $('#detailcard')
                 $('.modal-sidebar-body').html(detailContent);
 				$('.modaltable').html(tableDetails)
-				$.fancybox.open($('#deets'),{
-				'margin':'50px'
+                $.fancybox.open({
+						src:'#deets',
 					},{
 					afterClose:function(){
 						$('#deets').attr('style',"display:block");	
