@@ -850,6 +850,9 @@
                 $.fancybox.open({
 						src:'#deets',
 					},
+					{	
+						touch:false
+					},
 					{
 					afterClose:function(){
 						$('#deets').attr('style',"display:block");	
@@ -864,7 +867,9 @@
 				console.log("Biggah picture")
 				$.fancybox.open({
 					src:'#addItem'
-				},
+				},{	
+						touch:false
+					},
 				{
 					afterClose:function(){
 						
