@@ -65,7 +65,7 @@
 					
 					</li>
 				</div>
-				<div class="items-list" style="height:calc(100vh - 193px); overflow:scroll;">
+				<div class="items-list" id="issuesDisplay" style="height:calc(100vh - 193px); overflow:scroll;">
 					<div class="card issueCards" >
 						<div class="card-body" key=1>
 							<h5 class="card-titles">Checklist AHU-1</h5>
@@ -753,7 +753,7 @@
 		TODO with all three modals
 	 -->
 		<div class="modal" id="filtermodal" tabindex="-1" role="dialog">
-			<div class="modal-dialog modal-sm" role="document" id="detailsPane">
+			<div class="modal-dialog modal-sm m-0" role="document" id="detailsPane">
 				<div class="modal-content">
 					<div class="table">
 						<ul class="list-group" id="filterList">
@@ -815,7 +815,6 @@
 			$.fancybox.open($('#sidebar-content'),{
 				touch:true,
 				//Pass all CSS in quotes here
-				'padding':0,
 				afterClose:function(){
 				$('#sidebar-content').attr('style', "display:block")
 				}
@@ -840,12 +839,9 @@
                 var detailContent = $('#detailcard')
                 $('.modal-sidebar-body').html(detailContent);
 				$('.modaltable').html(tableDetails)
-                $.fancybox.open([
-
-					{
-						src:'#deets',
-					}
-				],{
+				$.fancybox.open($('#deets'),{
+				'margin':'50px'
+					},{
 					afterClose:function(){
 						$('#deets').attr('style',"display:block");	
 					}
@@ -876,7 +872,10 @@
 $('body').on('click', '#filterbtn', function(){
 	///Good ole modal
 	$.fancybox.open({
-		src:'#filtermodal'
+		src:'#filtermodal',
+		css:{
+			'margin':0
+		}
 	})
 })
 //Clicked item in modal
@@ -895,12 +894,13 @@ $('body').on('click','#filterList', function(e){
 //popover pagiantion 
 	
   $('.popoverbtn').popover({ html:true,placement:"top", content:function(){
-	  var calendar="<table><tbody><tr><td>1</td><td>2</td><td>3</td><td>4</td></tr></tbody></table>"
+	  var calendar="<table class='table'><tbody><tr><td>1</td><td>2</td><td>3</td><td>4</td></tr><tr><td>5</td><td>6</td><td>7</td><td>8</td></tr></tbody></table>"
 	  return calendar
 	}})
 
 
 $('body').on('click','.popover', function(e){
+	//log statement here will be pulled for updating page results
 	console.log(e.target.innerHTML)
 	$('.popover').popover('hide')
 })

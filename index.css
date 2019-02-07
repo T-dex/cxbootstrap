@@ -34,7 +34,11 @@ a:hover{
 .fancybox-content{
     padding:0
 }
-
+.fancybox-slide>#deets {   
+    height: 100%;
+    width:100%;
+    justify-content: center;
+}
 /* .footer{
     position: absolute;
     bottom: 0;
