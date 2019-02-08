@@ -770,15 +770,17 @@
 			</div>
 		</div>
 
-		<div id="addItem" style="height:100%;width:100%" onclick="">
-			<div>
-				<h1>Header for input gallery</h1>
-			</div>
-			<div>
-				<form>
-				<input type="text"/>
-				</form>
-			</div>
+		<div id="addItem" style="height:100%;width:100%" class="container-fluid">
+			<div class="container d-flex justify-content-center align-items-center">
+					<div>
+							<h1>Header for input gallery</h1>
+						</div>
+						<div id="addItemInput">
+							<form>
+							<input type="text" id="addIssueValue"/>
+							</form>
+						</div>
+			</div>	
 		</div>
 	</div>
 
@@ -792,8 +794,9 @@
 	<script type="text/javascript" src="./assests/bootstrap/js/bootstrap.js"></script>
 	<script src="./assests/jquery.fancybox.min.js"></script>
     <script>
-		
-
+		//Breakpoints
+		var mdBreak=768
+		var lgBreak=992
 // Filter button on Issues Pane
 
 		$('body').on('click','#hightoLow', function(e){
@@ -846,7 +849,7 @@
 			var updatedDetails=detailsCard.cloneNode(true)
 			$('#detailcard').html(updatedDetails);
 			//Media Breakpoint
-            if($(window).width() < 768){
+            if($(window).width() < mdBreak){
                 $.fancybox.open({
 						src:'#deets',
 						touch:false,
@@ -867,7 +870,10 @@
 				});
 			})
 		
-		
+		$('body').on('submit', '#addItemInput', function(e){
+			//Adding items to details pane
+			console.log($('#addIssueValue')[0].value)
+		})
 				
 
 
