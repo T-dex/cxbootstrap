@@ -849,48 +849,28 @@
             if($(window).width() < 768){
                 $.fancybox.open({
 						src:'#deets',
-					},
-					{	
-						touch:false
-					},
-					{
-					afterClose:function(){
-						$('#deets').attr('style',"display:block");	
-						$.fancybox.destroy();
+						touch:false,
+						afterClose:function(){
+						$('#detailsPane>#deets').attr('style',"display:block")
+						console.log($('#detailsPane>#deets'))
 					}
-				}
-				)
-			}
-		});
-		
+					
+				
+			
+		})
+	};
+})
 		$('body').on('click','#addIssue',function(){
-				console.log("Biggah picture")
 				$.fancybox.open({
-					src:'#addItem'
-				},{	
-						touch:false
-					},
-				{
-					afterClose:function(){
-						
-						$('#addItem').fancybox.getInstance().close();
-						$('#deets').attr('style',"display:block");	
-					}
-				}
-				)
+					src:'#addItem',
+					touch:false,
+				});
+			})
+		
+		
 				
 
-			})
 
-
-		// Moving the details to and from the Modal for the display pane. Tables are not the final product. Used for display purposes(sp?)
-		// $('body').on('hidden.bs.modal','#detailmodal', function (e) {	
-		// 	e.stopPropagation()
-		// 	var tableContent=$('#displaytable').detach();
-		// 	$('.table').html(tableContent)
-		// 	var detailContent = $('#detailcard').detach();
-		// 	$('#details').html(detailContent)
-		// });
 
 
 	//Hiding sidebar/checklist items general idea is present with grabbing data. 
